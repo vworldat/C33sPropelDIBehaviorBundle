@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__.'/C33sPropelBehaviorDependencyInjector.php');
+require_once(__DIR__.'/C33sPropelDependencyInjectorBehavior.php');
 
 /**
  * This class only acts as collection so that several instances of this behavior can be used.

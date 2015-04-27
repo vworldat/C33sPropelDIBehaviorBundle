@@ -2,7 +2,7 @@
 
 class C33sPropelDependencyInjectorBehavior extends Behavior
 {
-    protected $dependecies;
+    protected $dependencies;
 
     /**
      * @var int
@@ -23,18 +23,18 @@ class C33sPropelDependencyInjectorBehavior extends Behavior
 
             foreach ($behavior->getModelDependenciesToInject() as $name => $data)
             {
-                $this->addDependecy('model', $name, $data['method'], $data['typehint']);
+                $this->addDependency('model', $name, $data['method'], $data['typehint']);
             }
             foreach ($behavior->getQueryDependenciesToInject() as $name => $data)
             {
-                $this->addDependecy('query', $name, $data['method'], $data['typehint']);
+                $this->addDependency('query', $name, $data['method'], $data['typehint']);
             }
         }
     }
 
-    protected function addDependecy($type, $name, $method, $typehint)
+    protected function addDependency($type, $name, $method, $typehint)
     {
-        $this->dependecies[$type][$name] = array(
+        $this->dependencies[$type][$name] = array(
             'method' => $method,
             'typehint' => $typehint,
         );
@@ -42,7 +42,7 @@ class C33sPropelDependencyInjectorBehavior extends Behavior
 
     protected function getDependencies($type)
     {
-        return $this->dependecies[$type];
+        return $this->dependencies[$type];
     }
 
     public function objectAttributes(OMBuilder $builder)
@@ -86,7 +86,7 @@ class C33sPropelDependencyInjectorBehavior extends Behavior
 /**
  * @var array
  */
-protected \$injectedDependecies = array();
+protected \$injectedDependencies = array();
 
 EOF;
 
@@ -105,17 +105,17 @@ EOF;
     {
         $builder->declareClass('C33s\\PropelDIBehaviorBundle\\Injector\\DependencyInjectorInterface');
 
-        $names = array_keys($this->getDependecies($type));
+        $names = array_keys($this->getDependencies($type));
         $names = var_export($names, true);
 
         $methods = <<<EOF
 
 /**
- * Get names of dependecies that this class requires
+ * Get names of dependencies that this class requires
  *
  * @return array
  */
-public function getDependecyNamesToInject()
+public function getDependencyNamesToInject()
 {
     return {$names};
 }
@@ -130,7 +130,7 @@ public function getDependecyNamesToInject()
  */
 public function setInjectedDependencyCallable(\$name, callable \$dependencyCallable)
 {
-    \$this->injectedDependecies[\$name] = \$dependencyCallable;
+    \$this->injectedDependencies[\$name] = \$dependencyCallable;
 
     return \$this;
 }
@@ -142,12 +142,12 @@ public function setInjectedDependencyCallable(\$name, callable \$dependencyCalla
  */
 public function getInjectedDependency(\$name)
 {
-    if (!array_key_exists(\$name, \$this->injectedDependecies) || !is_callable(\$this->injectedDependecies[\$name]))
+    if (!array_key_exists(\$name, \$this->injectedDependencies) || !is_callable(\$this->injectedDependencies[\$name]))
     {
         throw new \InvalidArgumentException('Trying to get unknown dependency: '.\$name);
     }
 
-    \$callable = \$this->injectedDependecies[\$name];
+    \$callable = \$this->injectedDependencies[\$name];
 
     return \$callable();
 }
@@ -160,7 +160,7 @@ public function getInjectedDependency(\$name)
  */
 public function __sleep()
 {
-    return array_diff(parent::__sleep(), array('injectedDependecies'));
+    return array_diff(parent::__sleep(), array('injectedDependencies'));
 }
 
 EOF;
@@ -172,7 +172,7 @@ EOF;
     {
         $methods = '';
 
-        foreach ($this->getDependecies($type) as $name => $data)
+        foreach ($this->getDependencies($type) as $name => $data)
         {
             if (empty($data['method']))
             {
