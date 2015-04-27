@@ -61,9 +61,9 @@ or parameter name to inject (enclose parameters in %-chars) followed by optional
 by colons:
 
 * `logger:getLogger:\Psr\Log\LoggerInterface` injects the Symfony2 logger service, making it accessible by `$model->getLogger()` 
-(or $query->getLogger()) and providing `\Psr\Log\LoggerInterface` as a type hint for that getter
+(or `$query->getLogger()`) and providing `\Psr\Log\LoggerInterface` as a type hint for that getter
 * `logger` injects the Symfony2 logger service without an explicit getter. Use `$model->getInjectedDependency('logger')` to access it.
-* `%locale%:getLocale():string` injects the `locale` parameter, providing a getLocale() method for accessing it. 
+* `%locale%:getLocale:string` injects the `locale` parameter, providing a getLocale() method for accessing it. 
 
 ### Example schema
 
