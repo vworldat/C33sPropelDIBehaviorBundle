@@ -1,0 +1,11 @@
+parameters:
+    c33s.propel_di_behavior.injector_listener.class:    C33s\PropelDIBehaviorBundle\Injector\DependencyInjectorListener
+    
+services:
+    c33s.propel_di_behavior.injector_listener:
+        class:      "%c33s.propel_di_behavior.injector_listener.class%"
+        arguments:
+            - "@service_container"
+        tags:
+            - { name: 'propel.event', method: 'onModelConstruct', event: 'model.construct' }
+            - { name: 'propel.event', method: 'onQueryConstruct', event: 'query.construct' }

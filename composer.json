@@ -1,0 +1,30 @@
+{
+    "name": "c33s/propel-di-behavior-bundle",
+    "type": "symfony-bundle",
+    "description": "Clean Symfony2 dependency injection for your Propel models",
+    "homepage": "https://github.com/vworldat/C33sPropelDIBehaviorBundle",
+    "license": [
+        "MIT"
+    ],
+    "authors": [
+        {
+            "name": "David",
+            "email": "office@web-emerge.com",
+            "homepage": "http://web-emerge.com/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "C33s\\PropelDIBehaviorBundle\\": "PropelDIBehaviorBundle/"
+        },
+        "classmap": [
+            "/src"
+        ]
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0",
+        "propel/propel-bundle": "~1.2",
+        "glorpen/propel-bundle": "~1.2.0"
+    }
+}
