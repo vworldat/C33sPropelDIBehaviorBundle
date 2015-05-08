@@ -42,7 +42,7 @@ class C33sPropelDependencyInjectorBehavior extends Behavior
 
     protected function getDependencies($type)
     {
-        return $this->dependencies[$type];
+        return isset($this->dependencies[$type]) ? $this->dependencies[$type] : array();
     }
 
     public function objectAttributes(OMBuilder $builder)
